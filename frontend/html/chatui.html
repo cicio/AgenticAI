@@ -1,0 +1,37 @@
+// This is the HTML template for the ChatUI page. 
+//It contains the structure of the page and the placeholders
+// for the content that will be rendered by the Go server.
+//The  chatui.html  template is a simple HTML form that allows the user to enter a query. 
+// The form is submitted to the  /chatui  endpoint. The template also displays the answer to the query. 
+// The  chatui.html  template uses two blocks:  query  and  answer . 
+//The  query  block is used to display the form, while the  answer  block is used to display the answer. 
+//The  chatui.html  template is rendered by the  ChatUI  handler. 
+// The handler reads the query from the form and sends it to the  Chat  service. 
+// The handler then displays the answer to the query. 
+// The  ChatUI  handler is defined in the  chatui.go  file: 
+// chatui.go
+
+{{define "content"}}
+<p>
+    ChatUI:
+    {{.Message}}
+</p>
+
+
+{{block "query" .}}
+<div id="query">
+    <form action="/chatui" method="post">
+        <label for="query">Query:</label>
+        <input type="text" id="query" name="query" value="{{.Query}}" title="Enter your query" placeholder="Type your query here">
+        <input type="submit" value="Send">
+    </form>
+</div>
+{{end}}
+
+{{block "answer" .}}
+<div id="answer">
+    <p>Answer: {{.Answer}}</p>
+</div>
+{{end}}
+{{end}} 
+    
